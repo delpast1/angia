@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\User;
-use App\UsersPushSettings;
+use App\Utility;
 
 use Session;
 Use Redirect;
@@ -23,7 +23,7 @@ class users extends Controller
     }
 
     public function showUsers() {
-        $users = User::orderBy('id') -> paginate(10);
+        $users = User::orderBy('id', 'desc') -> paginate(20);
         return view('cms.user.showAll') -> with('users', $users);
     }
 
@@ -49,6 +49,11 @@ class users extends Controller
     public function destroy($id) {
         $user = User::find($id);
         $user -> settings() -> delete ();
+        $utilities = Utility::where('manage_user_id', '=', $id)->get();
+        foreach($utilities as $entity) {
+            $entity -> images() -> delete();
+        }
+        $user -> utilities() -> delete();
         $user -> delete();
 
         Session::flash('message', 'Successfully deleted the user!');

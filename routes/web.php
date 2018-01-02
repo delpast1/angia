@@ -30,8 +30,26 @@ Route::prefix('admin') -> group(function() {
     //delete user
     Route::get('user/delete/{id}', 'users@destroy');
 
-    //searching
-    Route::post('users/search','users@search');
+    //search users
+    Route::get('users/search','users@search');
+
+    //show fixed utilities
+    Route::get('fixed-utilities','utilities@fixedUtilitiesIndex');
+
+    //show movable utilities
+    Route::get('movable-utilities','utilities@movableUtilitiesIndex');
+
+    //search utilities
+    Route::get('utilities/search','utilities@search');
+
+     //delete utility
+     Route::get('utility/delete/{id}', 'utilities@destroy');
+
+     // get utility
+    Route::get('utility/{id}', 'utilities@edit');
+
+    // update user info
+    Route::post('utility/update/{id}', array('as' => 'utility.update', 'uses' => 'utilities@update'));
 });
 
 

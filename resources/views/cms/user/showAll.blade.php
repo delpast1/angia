@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-    {{ Form::open(array('url' => 'admin/users/search')) }}
+    {{ Form::open(array('url' => 'admin/users/search', 'method' => 'get')) }}
         {{ Form::text('phone', null, array('placeholder'=>'Số điện thoại')) }}
         {{ Form::text('email', null, array('placeholder'=>'Email')) }}
         {{ Form::submit('Tìm kiếm', array('class' => 'btn btn-primary')) }}
@@ -23,25 +23,24 @@
         <th>Họ tên</th>
         <th>Điện thoại</th>
         <th>Email</th>
+        <th>Số tiện ích</th>
         <th>Số sao</th>
         <th>Số point</th>
-        <th>Đấu giá</th>
-        <th></th>
+        <th>Trạng thái</th>
+        <th>Vị trí</th>
     </tr>
     @foreach ($users as $user)
     <tr>
         <td>{{$user->id}}</td>
-        <td>{{$user->created_date}}</td>
-        <td>{{$user->name}}</td>
+        <td>{{ \Carbon\Carbon::parse($user->created_date)->format('d/m/Y')}}</td>
+        <td><a href="{{ URL::to('admin/user/' . $user->id) }}" target="_blank">{{$user->name}}</a></td>
         <td>{{$user->phone}}</td>
         <td>{{$user->email}}</td>
+        <td>{{count($user->utilities)}}</td>
         <td>{{$user->rating}}</td>
         <td>{{$user->point}}</td>
         <td></td>
-        <td>
-            <a href="{{ URL::to('admin/user/' . $user->id) }}">Sửa</a>
-            <a href="{{ URL::to('admin/user/delete/' . $user->id) }}" >Xóa</a>
-        </td>
+        <td></td>
     </tr>
     @endforeach
     </table>

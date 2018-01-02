@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Users</title>
+    <title>services</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <style>
@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-    {{ Form::open(array('url' => 'admin/users/search')) }}
+    {{ Form::open(array('url' => 'admin/users/search', 'method' => 'get')) }}
         {{ Form::text('phone', null, array('placeholder'=>'Số điện thoại')) }}
         {{ Form::text('email', null, array('placeholder'=>'Email')) }}
         {{ Form::submit('Tìm kiếm', array('class' => 'btn btn-primary')) }}

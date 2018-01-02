@@ -14,4 +14,8 @@ class User extends Model
     public function settings(){
         return $this -> hasMany('App\UsersPushSettings');
     }
+
+    public function utilities(){
+        return $this -> hasMany('App\Utility', 'manage_user_id');
+    }
 }
